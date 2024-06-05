@@ -7,20 +7,20 @@ import javax.swing.*;
 
 public class TicTacToe implements ActionListener{
 	
-	Random random = new Random();
+	private Random random = new Random();
 	
-	JFrame frame = new JFrame();
+	private JFrame frame = new JFrame();
 	
-	JPanel panel = new JPanel();
-	JPanel title_panel = new JPanel();
-	JPanel button_panel = new JPanel();
-	JPanel secondButton_panel = new JPanel();
+	private JPanel panel = new JPanel();
+	private JPanel title_panel = new JPanel();
+	private JPanel button_panel = new JPanel();
+	private JPanel secondButton_panel = new JPanel();
 	
-	JLabel textfield = new JLabel();
+	private JLabel textfield = new JLabel();
 	
-	JButton[] buttons = new JButton[9];
-	JButton againButton = new JButton();
-	JButton statisticButton = new JButton();
+	private JButton[] buttons = new JButton[9];
+	private JButton againButton = new JButton();
+	private JButton statisticButton = new JButton();
 	
 	private boolean player1_turn;
 	private boolean gameFlow = false;
