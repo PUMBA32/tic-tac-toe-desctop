@@ -161,112 +161,60 @@ public class TicTacToe implements ActionListener{
 	}
 	
 	public void checkWinner() {
-		if((buttons[0].getText() == "X") && 
-			(buttons[1].getText() == "X") && 
-			(buttons[2].getText() == "X")) {
-			xWins(0,1,2);
-		}
-		else if((buttons[3].getText() == "X") && 
-			(buttons[4].getText() == "X") && 
-			(buttons[5].getText() == "X")) {
-			xWins(3,4,5);
-		}
-		else if((buttons[6].getText() == "X") && 
-			(buttons[7].getText() == "X") && 
-			(buttons[8].getText() == "X")) {
-			xWins(6,7,8);
-		}
-		else if((buttons[0].getText() == "X") && 
-			(buttons[3].getText() == "X") && 
-			(buttons[6].getText() == "X")) {
-			xWins(0,3,6);
-		}
-		else if((buttons[1].getText() == "X") && 
-			(buttons[4].getText() == "X") && 
-			(buttons[7].getText() == "X")) {
-			xWins(1,4,7);
-		}
-		else if((buttons[2].getText() == "X") && 
-			(buttons[5].getText() == "X") && 
-			(buttons[8].getText() == "X")) {
-			xWins(2,5,8);
-		}
-		else if((buttons[0].getText() == "X") && 
-			(buttons[4].getText() == "X") && 
-			(buttons[8].getText() == "X")) {
-			xWins(0,4,8);
-		}
-		else if((buttons[2].getText() == "X") && 
-			(buttons[4].getText() == "X") && 
-			(buttons[6].getText() == "X")) {
-			xWins(2,4,6);
+		String[] btnValues = new String[9];
+		
+		for(int i = 0; i < 9; i++) {
+			btnValues[i] = buttons[i].getText();
+			System.out.print(btnValues[i]+"");
 		}
 		
-		if((buttons[0].getText() == "O") && 
-				(buttons[1].getText() == "O") && 
-				(buttons[2].getText() == "O")) {
-				oWins(0,1,2);
-			}
-			else if((buttons[3].getText() == "O") && 
-				(buttons[4].getText() == "O") && 
-				(buttons[5].getText() == "O")) {
-				oWins(3,4,5);
-			}
-			else if((buttons[6].getText() == "O") && 
-				(buttons[7].getText() == "O") && 
-				(buttons[8].getText() == "O")) {
-				oWins(6,7,8);
-			}
-			else if((buttons[0].getText() == "O") && 
-				(buttons[3].getText() == "O") && 
-				(buttons[6].getText() == "O")) {
-				oWins(0,3,6);
-			}
-			else if((buttons[1].getText() == "O") && 
-				(buttons[4].getText() == "O") && 
-				(buttons[7].getText() == "O")) {
-				oWins(1,4,7);
-			}
-			else if((buttons[2].getText() == "O") && 
-				(buttons[5].getText() == "O") && 
-				(buttons[8].getText() == "O")) {
-				oWins(2,5,8);
-			}
-			else if((buttons[0].getText() == "O") && 
-				(buttons[4].getText() == "O") && 
-				(buttons[8].getText() == "O")) {
-				oWins(0,4,8);
-			}
-			else if((buttons[2].getText() == "O") && 
-				(buttons[4].getText() == "O") && 
-				(buttons[6].getText() == "O")) {
-				oWins(2,4,6);
-			}
+		// Horizontal
+		if(btnValues[0] == btnValues[1] && btnValues[1] == btnValues[2] && btnValues[0] != "") {
+			setWinner(0,1,2, btnValues[0]);
+		}
+		else if(btnValues[3] == btnValues[4] && btnValues[4] == btnValues[5] && btnValues[3] != "") {
+			setWinner(3,4,5, btnValues[3]);
+		}
+		else if(btnValues[6] == btnValues[7] && btnValues[7] == btnValues[8] && btnValues[6] != "") {
+			setWinner(6,7,8, btnValues[6]);
+		}
+		
+		// Vertical
+		if(btnValues[0] == btnValues[3] && btnValues[3] == btnValues[6] && btnValues[0] != "") {
+			setWinner(0,3,6, btnValues[0]);
+		}
+		else if(btnValues[1] == btnValues[4] && btnValues[4] == btnValues[7] && btnValues[1] != "") {
+			setWinner(1,4,7, btnValues[1]);
+		}
+		else if(btnValues[2] == btnValues[5] && btnValues[5] == btnValues[8] && btnValues[2] != "") {
+			setWinner(2,5,8, btnValues[2]);
+		}
+		
+		// Diagonals
+		if(btnValues[0] == btnValues[4] && btnValues[4] == btnValues[8] && btnValues[0] != "") {
+			setWinner(0,4,8, btnValues[0]);
+		}
+		else if(btnValues[2] == btnValues[4] && btnValues[4] == btnValues[6] && btnValues[2] != "") {
+			setWinner(2,4,6, btnValues[2]);
+		}
 	}
-	
-	// if X (player) will be winner
-	public void xWins(int a, int b, int c) {
+
+	public void setWinner(int a, int b, int c, String winner) {
 		// Color change from white to green
 		buttons[a].setBackground(Color.GREEN);
 		buttons[b].setBackground(Color.GREEN);
 		buttons[c].setBackground(Color.GREEN);
-		textfield.setText("You won!");
+		
+		if(winner.equals("O")) {
+			textfield.setText("O won! You lose :(");
+			this.oWinsCount++;
+		}
+		else {
+			textfield.setText("You won!");
+			this.xWinsCount++;
+		}
 		
 		this.gameFlow = false;
-		this.xWinsCount++;
-		this.fullGameCount++;
-	}
-	
-	// if O (computer) will be winner
-	public void oWins(int a, int b, int c) {
-		// Color change from white to green
-		buttons[a].setBackground(Color.GREEN);
-		buttons[b].setBackground(Color.GREEN);
-		buttons[c].setBackground(Color.GREEN);
-		textfield.setText("O won! You lose :(");
-		
-		this.gameFlow = false;
-		this.oWinsCount++;
 		this.fullGameCount++;
 	}
 	
